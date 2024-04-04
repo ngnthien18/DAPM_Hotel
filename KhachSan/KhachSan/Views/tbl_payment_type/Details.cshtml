@@ -1,0 +1,27 @@
+﻿@model KhachSan.Models.DB.tbl_payment_type
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div>
+    <h3>Hình Thức Thanh Toán</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Hình Thức Thanh Toán
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.payment_type)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.payment_type_id }, new { @class = "btn btn-warning" }) 
+    @Html.ActionLink("Trở Lại", "Index", null, new { @class = "btn btn-info" })
+</p>

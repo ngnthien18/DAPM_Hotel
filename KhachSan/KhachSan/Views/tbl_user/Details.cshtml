@@ -1,0 +1,51 @@
+﻿@model KhachSan.Models.DB.tbl_user
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div>
+    <h3>Quản Lý</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.username)
+        </dd>
+
+        <dt>
+            Email
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            Mật Khẩu
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_password)
+        </dd>
+
+        <dt>
+            Chức Vụ
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_user_level.user_type)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.userid }, new { @class = "btn btn-warning" }) 
+    @Html.ActionLink("Trở Lại", "Index", null, new { @class = "btn btn-info" })
+</p>

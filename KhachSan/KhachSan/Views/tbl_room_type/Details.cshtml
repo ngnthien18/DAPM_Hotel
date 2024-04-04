@@ -1,0 +1,51 @@
+﻿@model KhachSan.Models.DB.tbl_room_type
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div>
+    <h3>Loại Phòng</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Loại Phòng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.room_name)
+        </dd>
+
+        <dt>
+            Mô Tả
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            Giá
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.room_price)
+        </dd>
+
+        <dt>
+            Số Giường
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.room_capacity)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.room_type_id }, new { @class = "btn btn-warning" }) 
+    @Html.ActionLink("Trở Lại", "Index", null, new { @class = "btn btn-info" })
+</p>

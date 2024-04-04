@@ -1,0 +1,61 @@
+﻿@model IEnumerable<KhachSan.Models.DB.tbl_booking>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Khách Hàng
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.booking_from)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.booking_to)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.no_of_members)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total_amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbl_room.room_number)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.tbl_customer.cusname
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.booking_from)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.booking_to)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.no_of_members)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total_amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbl_room.room_number)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.booking_id })
+        </td>
+    </tr>
+}
+
+</table>

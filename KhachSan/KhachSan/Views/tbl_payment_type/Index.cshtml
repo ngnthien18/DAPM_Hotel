@@ -1,0 +1,36 @@
+﻿@model IEnumerable<KhachSan.Models.DB.tbl_payment_type>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<p>
+    <div style="padding-top:3px">
+
+    @Html.ActionLink("Tạo Mới", "Create", null, new { @class = "btn btn-outline-secondary" })
+    </div>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Hình Thức Thanh Toán
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.payment_type)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "Edit", new { id=item.payment_type_id }, new { @class = "btn btn-outline-success" }) 
+            @Html.ActionLink("Chi Tiết", "Details", new { id=item.payment_type_id }, new { @class = "btn btn-outline-warning" })
+            @Html.ActionLink("Xóa", "Delete", new { id=item.payment_type_id }, new { @class = "btn btn-outline-danger" })
+        </td>
+    </tr>
+}
+
+</table>

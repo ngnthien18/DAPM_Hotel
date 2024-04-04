@@ -1,0 +1,493 @@
+﻿@model KhachSan.Models.DB.tbl_booking
+
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Montana</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/ViewContent/img/favicon.png">
+    <!-- Place favicon.ico in the root directory -->
+    <!-- CSS here -->
+    <link rel="stylesheet" href="~/Content/ViewContent/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/ViewContent/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/ViewContent/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/Content/ViewContent/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/ViewContent/css/themify-icons.css">
+    <link rel="stylesheet" href="~/Content/ViewContent/css/nice-select.css">
+    <link rel="stylesheet" href="~/Content/ViewContent/css/flaticon.css">
+    <link rel="stylesheet" href="~/Content/ViewContent/css/gijgo.css">
+    <link rel="stylesheet" href="~/Content/ViewContent/css/animate.css">
+    <link rel="stylesheet" href="~/Content/ViewContent/css/slicknav.css">
+    <link rel="stylesheet" href="~/Content/ViewContent/css/style.css">
+    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+    <!-- header-start -->
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid p-0">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col-xl-5 col-lg-6">
+                            <div class="main-menu  d-none d-lg-block">
+                                <nav>
+                                    <ul id="navigation">
+                                        <li><a href="@Url.Action("Home","View")">Trang Chủ</a></li>
+                                        <li><a href="@Url.Action("Room","View")">Phòng</a></li>
+                                        <li><a class="active" href="@Url.Action("About","View")">Giới Thiệu</a></li>
+
+                                        <li><a href="@Url.Action("Contact","View")">Liên Hệ</a></li>
+
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-2">
+                            <div class="logo-img">
+                                <a href="@Url.Action("Home","View")">
+                                    <img src="~/Content/ViewContent/img/logo.png" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-5 col-lg-4 d-none d-lg-block">
+                            <div class="book_room">
+                                <div class="socail_links">
+                                    <ul>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-facebook-square"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                @if (Session["CusName"] == null)
+                                {
+
+                                    <div class="book_btn d-none d-lg-block">
+
+                                        <a href="@Url.Action("SignUp", "Home")">Đăng Ký</a>
+                                    </div>
+                                    <div class="book_btn d-none d-lg-block">
+
+                                        <a href="@Url.Action("LoginCus", "Home")">Đăng Nhập</a>
+                                    </div>}
+                                else
+                                {
+
+                                    <div class="book_btn d-none d-lg-block">
+
+                                        <a href="@Url.Action("CusIndex/"+Session["Id"], "tbl_booking")">@Session["CusName"]</a>
+                                    </div>
+                                    <div class="book_btn d-none d-lg-block">
+
+                                        <a href="@Url.Action("LogOut", "Home")">Đăng Xuất</a>
+                                    </div>
+                                    <div class="book_btn d-none d-lg-block">
+
+                                        <a class="popup-with-form" href="#test-form">Đặt Phòng</a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header-end -->
+    <!-- bradcam_area_start -->
+    <div class="bradcam_area breadcam_bg">
+        <h3>Giới Thiệu Khách Sạn</h3>
+    </div>
+    <!-- bradcam_area_end -->
+    <!-- about_area_start -->
+    <div class="about_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-5 col-lg-5">
+                    <div class="about_info">
+                        <div class="section_title mb-20px">
+                            <span>Về Chúng Tôi</span>
+                            <h3>
+                                Khách Sạn Đẹp <br>
+                                chuẩn 5 sao
+                            </h3>
+                        </div>
+                        <p>Chào mừng đến với khách sạn chúng tôi, nơi cung cấp cho bạn trải nghiệm nghỉ dưỡng tuyệt vời và dịch vụ tận tâm. Với vị trí thuận lợi, chúng tôi tự hào mang đến không gian sang trọng, thiết kế tinh tế và sự chăm sóc tỉ mỉ đến từng chi tiết. Với đội ngũ nhân viên chuyên nghiệp, chúng tôi cam kết đáp ứng mọi nhu cầu của bạn để tạo nên kỳ nghỉ đáng nhớ. Hãy đến và khám phá một thế giới của sự thoải mái và thư giãn tại khách sạn của chúng tôi.</p>
+                        <a href="#" class="line-button">Tìm Hiểu Thêm</a>
+                    </div>
+                </div>
+                <div class="col-xl-7 col-lg-7">
+                    <div class="about_thumb d-flex">
+                        <div class="img_1">
+                            <img src="~/Content/ViewContent/img/about/about_1.png" alt="">
+                        </div>
+                        <div class="img_2">
+                            <img src="~/Content/ViewContent/img/about/about_2.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- about_area_end -->
+    <!-- about_info_area_start -->
+    <div class="about_info_area">
+        <div class="about_active owl-carousel">
+            <div class="single_slider about_bg_1"></div>
+            <div class="single_slider about_bg_1"></div>
+            <div class="single_slider about_bg_1"></div>
+            <div class="single_slider about_bg_1"></div>
+        </div>
+    </div>
+    <!-- about_info_area_start -->
+    <!-- about_main_info_start -->
+    <div class="about_main_info">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 col-md-6">
+                    <div class="single_about_info">
+                        <h3>
+                            Thực Đơn Phong Phú, Đa Dạng
+                        </h3>
+                        <p>
+                            Hãy chuẩn bị cho một hành trình ẩm thực tuyệt vời tại khách sạn của chúng tôi, nơi chúng tôi mang đến cho bạn một thực đơn đa dạng và hương vị tuyệt vời.
+
+                            Bắt đầu ngày mới với bữa sáng sảng khoái, chúng tôi cung cấp một loạt các lựa chọn phong phú từ món ăn truyền thống đến món ăn sáng chay, bữa sáng kiểu Á và các loại đồ uống tươi mát. Bạn có thể thưởng thức món bánh mì nướng mới rất thơm ngon, trứng chiên vàng ruộm, hũu cơ tươi mát, hoặc đắm chìm trong hương vị của các món ăn đặc sản địa phương.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-md-6">
+                    <div class="single_about_info">
+                        <h3>
+                            Thực Đơn Phong Phú, Đa Dạng
+                        </h3>
+                        <p>
+                            Trong suốt ngày, chúng tôi cung cấp các món nhẹ tại quầy bar, từ các món sandwich tươi ngon, salad sảng khoái cho đến các món ăn nhẹ đa dạng khác, giúp bạn duy trì sự cân đối và năng lượng trong suốt ngày dài khám phá.
+
+                            Đến bữa tối, chúng tôi mời bạn vào một cuộc hành trình ẩm thực đặc biệt. Thực đơn của chúng tôi được thiết kế kỹ lưỡng, kết hợp giữa hương vị truyền thống và sự sáng tạo đương đại. Bạn có thể thưởng thức các món hải sản tươi sống, thịt tươi ngon từ những nguồn cung cấp đáng tin cậy, các món rau củ tươi mát và các món tráng miệng tuyệt vời.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- about_main_info_end -->
+    <!-- forQuery_start -->
+    <div class="forQuery">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-10 offset-xl-1 col-md-12">
+                    <div class="Query_border">
+                        <div class="row align-items-center justify-content-center">
+                            <div class="col-xl-6 col-md-6">
+                                <div class="Query_text">
+                                    <p>Cần Tư Vấn, Hỗ Trợ?</p>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-md-6">
+                                <div class="phone_num">
+                                    <a href="#" class="mobile_no">0935176455</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- forQuery_end-->
+    <!-- instragram_area_start -->
+    <div class="instragram_area">
+        <div class="single_instagram">
+            <img src="~/Content/ViewContent/img/instragram/1.png" alt="">
+            <div class="ovrelay">
+                <a href="#">
+                    <i class="fa fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+        <div class="single_instagram">
+            <img src="~/Content/ViewContent/img/instragram/2.png" alt="">
+            <div class="ovrelay">
+                <a href="#">
+                    <i class="fa fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+        <div class="single_instagram">
+            <img src="~/Content/ViewContent/img/instragram/3.png" alt="">
+            <div class="ovrelay">
+                <a href="#">
+                    <i class="fa fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+        <div class="single_instagram">
+            <img src="~/Content/ViewContent/img/instragram/4.png" alt="">
+            <div class="ovrelay">
+                <a href="#">
+                    <i class="fa fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+        <div class="single_instagram">
+            <img src="~/Content/ViewContent/img/instragram/5.png" alt="">
+            <div class="ovrelay">
+                <a href="#">
+                    <i class="fa fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- instragram_area_end -->
+    <!-- footer -->
+    <footer class="footer">
+        <div class="footer_top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-3 col-md-6 col-lg-3">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                Địa Chỉ
+                            </h3>
+                            <p class="footer_text">
+                                HUFLIT: 828 Sư Vạn Hạnh,<br>
+                                Phường 13, Quận 10, TP.Hồ Chí Minh.
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-lg-3">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                Liên Hệ
+                            </h3>
+                            <p class="footer_text">
+                                0935176455<br>
+                                team6@gmail.com
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-6 col-lg-2">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                Liên Kết
+                            </h3>
+                            <ul>
+                                <li><a href="@Url.Action("Home","View")">Trang Chủ</a></li>
+                                <li><a href="@Url.Action("Room","View")">Phòng</a></li>
+                                <li><a href="@Url.Action("About","View")">Giới Thiệu</a></li>
+                                <li><a href="@Url.Action("Contact","View")">Liên Hệ</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6 col-lg-4">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                Bản Tin
+                            </h3>
+                            <form action="#" class="newsletter_form">
+                                <input type="text" placeholder="Nhập nội dung">
+                                <button type="submit">Đăng Ký</button>
+                            </form>
+                            <p class="newsletter_text">Theo dõi bản tin để biết thông tin.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copy-right_text">
+            <div class="container">
+                <div class="footer_border"></div>
+                <div class="row">
+                    <div class="col-xl-8 col-md-7 col-lg-9">
+                        <p class="copy_right">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </div>
+                    <div class="col-xl-4 col-md-5 col-lg-3">
+                        <div class="socail_links">
+                            <ul>
+                                <li>
+                                    <a href="https://www.facebook.com">
+                                        <i class="fa fa-facebook-square"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.twitter.com">
+                                        <i class="fa fa-twitter"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.instagram.com">
+                                        <i class="fa fa-instagram"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer_end -->
+    <!-- form itself end-->
+    <form method="post" asp-controller="View" asp-action="Home" id="test-form" class="white-popup-block mfp-hide">
+        <div class="popup_box ">
+            <div class="popup_inner">
+                <h3>Đặt Phòng</h3>
+
+                @using (Html.BeginForm("Home", "View", FormMethod.Post, new { @id = "formCustomerBooking" }))
+                {
+                    <div class="row">
+                        <div class="col-xl-6">
+                            @Html.Label("Tên Khách Hàng", new { @class = "control-label" })
+                            @Html.TextBox("customer_name", Session["NameCus"] as string, new { @class = "form-control", placeholder = "Tên" })
+                            @Html.ValidationMessage("customer_name", null, new { @class = "text-danger" })
+                        </div>
+                        <div class="col-xl-6">
+                            @Html.LabelFor(model => model.customer_address, "Địa Chỉ Khách Hàng", new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.customer_address, new { @class = "form-control", placeholder = "Địa Chỉ" })
+                            @Html.ValidationMessageFor(model => model.customer_address, null, new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6">
+                            @Html.LabelFor(model => model.customer_email, "Email Khách Hàng", new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.customer_email, new { @class = "form-control", type = "email", placeholder = "Email" })
+                            @Html.ValidationMessageFor(model => model.customer_email, null, new { @class = "text-danger" })
+                        </div>
+                        <div class="col-xl-6">
+                            @Html.LabelFor(model => model.customer_phone_no, "Số Điện Thoại Khách Hàng", new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.customer_phone_no, new { @class = "form-control", placeholder = "Số Điện Thoại" })
+                            @Html.ValidationMessageFor(model => model.customer_phone_no, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6" style="margin-bottom:20px; margin-top:20px">
+
+                            @Html.LabelFor(model => model.booking_from, "Ngày Đến", new { @class = "control-label" })
+                            @Html.EditorFor(model => model.booking_from, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.booking_from, null, new { @class = "text-danger" })
+
+
+                        </div>
+                        <div class="col-xl-6" style="margin-bottom:20px; margin-top:20px">
+                            @Html.LabelFor(model => model.booking_to, "Ngày Đi", new { @class = "control-label" })
+                            @Html.EditorFor(model => model.booking_to, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.booking_to, null, new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6">
+                            @Html.LabelFor(model => model.assigned_room, "Phòng", new { @class = "control-label" })
+
+                            @Html.DropDownList("assigned_room", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.assigned_room, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-xl-6">
+                            @Html.LabelFor(model => model.tbl_payment_type, "Hình Thức Thanh Toán", new { @class = "control-label" })
+
+                            @Html.DropDownList("payment_type", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.tbl_payment_type, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="col-md-6" style="margin-left:150px;margin-bottom:20px; margin-top:20px">
+
+                            @Html.LabelFor(model => model.no_of_members, "Số Người", new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.no_of_members, new { @class = "form-control", placeholder = "Số Người" })
+                            @Html.ValidationMessageFor(model => model.no_of_members, null, new { @class = "text-danger" })
+                        </div>
+
+
+
+                        <div class="col-xl-12" style="margin-bottom:20px; margin-top:20px">
+                            <button id="btnSave" type="submit" class="boxed-btn3">Đặt Phòng</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </form>
+    <!-- JS here -->
+    <script src="~/Content/ViewContent/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="~/Content/ViewContent/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/ViewContent/js/popper.min.js"></script>
+    <script src="~/Content/ViewContent/js/bootstrap.min.js"></script>
+    <script src="~/Content/ViewContent/js/owl.carousel.min.js"></script>
+    <script src="~/Content/ViewContent/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/ViewContent/js/ajax-form.js"></script>
+    <script src="~/Content/ViewContent/js/waypoints.min.js"></script>
+    <script src="~/Content/ViewContent/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/ViewContent/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/ViewContent/js/scrollIt.js"></script>
+    <script src="~/Content/ViewContent/js/jquery.scrollUp.min.js"></script>
+    <script src="~/Content/ViewContent/js/wow.min.js"></script>
+    <script src="~/Content/ViewContent/js/nice-select.min.js"></script>
+    <script src="~/Content/ViewContent/js/jquery.slicknav.min.js"></script>
+    <script src="~/Content/ViewContent/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/ViewContent/js/plugins.js"></script>
+    <script src="~/Content/ViewContent/js/gijgo.min.js"></script>
+
+    <!--contact js-->
+    <script src="~/Content/ViewContent/js/contact.js"></script>
+    <script src="~/Content/ViewContent/js/jquery.ajaxchimp.min.js"></script>
+    <script src="~/Content/ViewContent/js/jquery.form.js"></script>
+    <script src="~/Content/ViewContent/js/jquery.validate.min.js"></script>
+    <script src="~/Content/ViewContent/js/mail-script.js"></script>
+
+    <script src="~/Content/ViewContent/js/main.js"></script>
+    <script>
+        $('#datepicker').datepicker({
+            iconsLibrary: 'fontawesome',
+            icons: {
+             rightIcon: '<span class="fa fa-caret-down"></span>'
+         }
+        });
+        $('#datepicker2').datepicker({
+            iconsLibrary: 'fontawesome',
+            icons: {
+             rightIcon: '<span class="fa fa-caret-down"></span>'
+         }
+
+        });
+    </script>
+
+
+</body>
+
+</html>

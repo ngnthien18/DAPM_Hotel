@@ -1,0 +1,36 @@
+﻿@model IEnumerable<KhachSan.Models.DB.tbl_booking_status>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<p>
+    <div style="padding-top:3px">
+        @Html.ActionLink("Tạo Mới", "Create", null, new { @class = "btn btn-outline-secondary" })
+    </div>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Trạng Thái Phòng
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.booking_status)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "Edit", new { id=item.booking_status_id }, new { @class = "btn btn-outline-success" }) 
+            @Html.ActionLink("Chi Tiết", "Details", new { id=item.booking_status_id }, new { @class = "btn btn-outline-warning" }) 
+            @Html.ActionLink("Xóa", "Delete", new { id=item.booking_status_id }, new { @class = "btn btn-outline-danger" })
+        </td>
+    </tr>
+}
+
+</table>

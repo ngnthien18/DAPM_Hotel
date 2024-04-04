@@ -1,0 +1,42 @@
+﻿@model KhachSan.Models.DB.tbl_customer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbl_customer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.cusname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cusname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.emailcus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.emailcus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cus_password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cus_password)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.cus_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

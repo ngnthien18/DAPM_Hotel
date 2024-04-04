@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="KhachSanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tbl_booking">
+    <Key>
+      <PropertyRef Name="booking_id" />
+    </Key>
+    <Property Name="booking_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customer_address" Type="String" MaxLength="550" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="customer_email" Type="String" MaxLength="550" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="customer_phone_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="booking_from" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="booking_to" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="payment_type" Type="Int32" Nullable="false" />
+    <Property Name="assigned_room" Type="Int32" Nullable="false" />
+    <Property Name="no_of_members" Type="Byte" />
+    <Property Name="total_amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="cus_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tbl_room" Relationship="Self.FK_ass_room_Id" FromRole="tbl_booking" ToRole="tbl_room" />
+    <NavigationProperty Name="tbl_customer" Relationship="Self.FK_cus_Id" FromRole="tbl_booking" ToRole="tbl_customer" />
+    <NavigationProperty Name="tbl_payment_type" Relationship="Self.FK_paytyp_pay_Id" FromRole="tbl_booking" ToRole="tbl_payment_type" />
+  </EntityType>
+  <EntityType Name="tbl_booking_status">
+    <Key>
+      <PropertyRef Name="booking_status_id" />
+    </Key>
+    <Property Name="booking_status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="booking_status" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tbl_room" Relationship="Self.FK_booking_status" FromRole="tbl_booking_status" ToRole="tbl_room" />
+  </EntityType>
+  <EntityType Name="tbl_customer">
+    <Key>
+      <PropertyRef Name="cus_id" />
+    </Key>
+    <Property Name="cus_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cusname" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="emailcus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cus_password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tbl_booking" Relationship="Self.FK_cus_Id" FromRole="tbl_customer" ToRole="tbl_booking" />
+  </EntityType>
+  <EntityType Name="tbl_payment">
+    <Key>
+      <PropertyRef Name="payment_id" />
+    </Key>
+    <Property Name="payment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="booking_id" Type="Byte" Nullable="false" />
+    <Property Name="payment_type_id" Type="Int32" Nullable="false" />
+    <Property Name="payment_amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Is_Active" Type="Boolean" />
+    <NavigationProperty Name="tbl_payment_type" Relationship="Self.fk_payment_type" FromRole="tbl_payment" ToRole="tbl_payment_type" />
+  </EntityType>
+  <EntityType Name="tbl_payment_type">
+    <Key>
+      <PropertyRef Name="payment_type_id" />
+    </Key>
+    <Property Name="payment_type_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="payment_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tbl_booking" Relationship="Self.FK_paytyp_pay_Id" FromRole="tbl_payment_type" ToRole="tbl_booking" />
+    <NavigationProperty Name="tbl_payment" Relationship="Self.fk_payment_type" FromRole="tbl_payment_type" ToRole="tbl_payment" />
+  </EntityType>
+  <EntityType Name="tbl_room">
+    <Key>
+      <PropertyRef Name="room_id" />
+    </Key>
+    <Property Name="room_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="room_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="room_type_id" Type="Int32" Nullable="false" />
+    <Property Name="booking_status_id" Type="Int32" Nullable="false" />
+    <Property Name="is_Active" Type="Boolean" />
+    <NavigationProperty Name="tbl_booking" Relationship="Self.FK_ass_room_Id" FromRole="tbl_room" ToRole="tbl_booking" />
+    <NavigationProperty Name="tbl_booking_status" Relationship="Self.FK_booking_status" FromRole="tbl_room" ToRole="tbl_booking_status" />
+    <NavigationProperty Name="tbl_room_type" Relationship="Self.fk_room_type" FromRole="tbl_room" ToRole="tbl_room_type" />
+  </EntityType>
+  <EntityType Name="tbl_room_type">
+    <Key>
+      <PropertyRef Name="room_type_id" />
+    </Key>
+    <Property Name="room_type_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="room_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="room_price" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="room_capacity" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="tbl_room" Relationship="Self.fk_room_type" FromRole="tbl_room_type" ToRole="tbl_room" />
+  </EntityType>
+  <EntityType Name="tbl_user">
+    <Key>
+      <PropertyRef Name="userid" />
+    </Key>
+    <Property Name="userid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="user_password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="user_level" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tbl_user_level" Relationship="Self.FK_usr_level_no" FromRole="tbl_user" ToRole="tbl_user_level" />
+  </EntityType>
+  <EntityType Name="tbl_user_level">
+    <Key>
+      <PropertyRef Name="user_level_id" />
+    </Key>
+    <Property Name="user_level_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_type" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tbl_user" Relationship="Self.FK_usr_level_no" FromRole="tbl_user_level" ToRole="tbl_user" />
+  </EntityType>
+  <Association Name="FK_ass_room_Id">
+    <End Role="tbl_room" Type="Self.tbl_room" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tbl_booking" Type="Self.tbl_booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_room">
+        <PropertyRef Name="room_id" />
+      </Principal>
+      <Dependent Role="tbl_booking">
+        <PropertyRef Name="assigned_room" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_cus_Id">
+    <End Role="tbl_customer" Type="Self.tbl_customer" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tbl_booking" Type="Self.tbl_booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_customer">
+        <PropertyRef Name="cus_id" />
+      </Principal>
+      <Dependent Role="tbl_booking">
+        <PropertyRef Name="cus_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_paytyp_pay_Id">
+    <End Role="tbl_payment_type" Type="Self.tbl_payment_type" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tbl_booking" Type="Self.tbl_booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_payment_type">
+        <PropertyRef Name="payment_type_id" />
+      </Principal>
+      <Dependent Role="tbl_booking">
+        <PropertyRef Name="payment_type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_booking_status">
+    <End Role="tbl_booking_status" Type="Self.tbl_booking_status" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tbl_room" Type="Self.tbl_room" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_booking_status">
+        <PropertyRef Name="booking_status_id" />
+      </Principal>
+      <Dependent Role="tbl_room">
+        <PropertyRef Name="booking_status_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_payment_type">
+    <End Role="tbl_payment_type" Type="Self.tbl_payment_type" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tbl_payment" Type="Self.tbl_payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_payment_type">
+        <PropertyRef Name="payment_type_id" />
+      </Principal>
+      <Dependent Role="tbl_payment">
+        <PropertyRef Name="payment_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_room_type">
+    <End Role="tbl_room_type" Type="Self.tbl_room_type" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tbl_room" Type="Self.tbl_room" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_room_type">
+        <PropertyRef Name="room_type_id" />
+      </Principal>
+      <Dependent Role="tbl_room">
+        <PropertyRef Name="room_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_usr_level_no">
+    <End Role="tbl_user_level" Type="Self.tbl_user_level" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_user_level">
+        <PropertyRef Name="user_level_id" />
+      </Principal>
+      <Dependent Role="tbl_user">
+        <PropertyRef Name="user_level" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="KhachSanEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tbl_booking" EntityType="Self.tbl_booking" />
+    <EntitySet Name="tbl_booking_status" EntityType="Self.tbl_booking_status" />
+    <EntitySet Name="tbl_customer" EntityType="Self.tbl_customer" />
+    <EntitySet Name="tbl_payment" EntityType="Self.tbl_payment" />
+    <EntitySet Name="tbl_payment_type" EntityType="Self.tbl_payment_type" />
+    <EntitySet Name="tbl_room" EntityType="Self.tbl_room" />
+    <EntitySet Name="tbl_room_type" EntityType="Self.tbl_room_type" />
+    <EntitySet Name="tbl_user" EntityType="Self.tbl_user" />
+    <EntitySet Name="tbl_user_level" EntityType="Self.tbl_user_level" />
+    <AssociationSet Name="FK_ass_room_Id" Association="Self.FK_ass_room_Id">
+      <End Role="tbl_room" EntitySet="tbl_room" />
+      <End Role="tbl_booking" EntitySet="tbl_booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK_cus_Id" Association="Self.FK_cus_Id">
+      <End Role="tbl_customer" EntitySet="tbl_customer" />
+      <End Role="tbl_booking" EntitySet="tbl_booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK_paytyp_pay_Id" Association="Self.FK_paytyp_pay_Id">
+      <End Role="tbl_payment_type" EntitySet="tbl_payment_type" />
+      <End Role="tbl_booking" EntitySet="tbl_booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK_booking_status" Association="Self.FK_booking_status">
+      <End Role="tbl_booking_status" EntitySet="tbl_booking_status" />
+      <End Role="tbl_room" EntitySet="tbl_room" />
+    </AssociationSet>
+    <AssociationSet Name="fk_payment_type" Association="Self.fk_payment_type">
+      <End Role="tbl_payment_type" EntitySet="tbl_payment_type" />
+      <End Role="tbl_payment" EntitySet="tbl_payment" />
+    </AssociationSet>
+    <AssociationSet Name="fk_room_type" Association="Self.fk_room_type">
+      <End Role="tbl_room_type" EntitySet="tbl_room_type" />
+      <End Role="tbl_room" EntitySet="tbl_room" />
+    </AssociationSet>
+    <AssociationSet Name="FK_usr_level_no" Association="Self.FK_usr_level_no">
+      <End Role="tbl_user_level" EntitySet="tbl_user_level" />
+      <End Role="tbl_user" EntitySet="tbl_user" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

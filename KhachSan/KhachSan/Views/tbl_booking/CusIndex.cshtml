@@ -1,0 +1,308 @@
+﻿@model IEnumerable<KhachSan.Models.DB.tbl_booking>
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Montana</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/ViewContent/img/favicon.png">
+    <!-- Place favicon.ico in the root directory -->
+    <!-- CSS here -->
+    <link rel="stylesheet" href="~/Content/ViewContent/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/ViewContent/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/ViewContent/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/Content/ViewContent/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/ViewContent/css/themify-icons.css">
+    <link rel="stylesheet" href="~/Content/ViewContent/css/nice-select.css">
+    <link rel="stylesheet" href="~/Content/ViewContent/css/flaticon.css">
+    <link rel="stylesheet" href="~/Content/ViewContent/css/gijgo.css">
+    <link rel="stylesheet" href="~/Content/ViewContent/css/animate.css">
+    <link rel="stylesheet" href="~/Content/ViewContent/css/slicknav.css">
+    <link rel="stylesheet" href="~/Content/ViewContent/css/style.css">
+
+</head>
+
+<body>
+
+
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid p-0">
+                    <div class="row align-items-center no-gutters">
+                        <div class="col-xl-5 col-lg-6">
+                            <div class="main-menu  d-none d-lg-block">
+                                <nav>
+                                    <ul id="navigation">
+                                        <li><a class="active" href="@Url.Action("Home","View")">Trang Chủ</a></li>
+                                        <li><a href="@Url.Action("Room","View")">Phòng</a></li>
+                                        <li><a href="@Url.Action("About","View")">Giới Thiệu</a></li>
+
+                                        <li><a href="@Url.Action("Contact","View")">Liên Hệ</a></li>
+
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-2">
+                            <div class="logo-img">
+                                <a href="@Url.Action("Home","View")">
+                                    <img src="~/Content/ViewContent/img/logo.png" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-5 col-lg-4 d-none d-lg-block">
+                            <div class="book_room">
+                                <div class="socail_links">
+                                    <ul>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-facebook-square"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                @if (Session["CusName"] == null)
+                                {
+
+                                    <div class="book_btn d-none d-lg-block">
+
+                                        <a href="@Url.Action("SignUp", "Home")">Đăng Ký</a>
+                                    </div>
+                                    <div class="book_btn d-none d-lg-block">
+
+                                        <a href="@Url.Action("LoginCus", "Home")">Đăng Nhập</a>
+                                    </div>}
+                                else
+                                {
+
+                                    <div class="book_btn d-none d-lg-block">
+
+                                        <a href="@Url.Action("CusIndex/"+Session["Id"], "tbl_booking")">@Session["CusName"]</a>
+                                    </div>
+                                    <div class="book_btn d-none d-lg-block">
+
+                                        <a href="@Url.Action("LogOut", "Home")">Đăng Xuất</a>
+                                    </div>
+                                    <div class="book_btn d-none d-lg-block">
+
+                                        <a class="popup-with-form" href="#test-form">Đặt Phòng</a>
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <table class="table">
+        <tr>
+            <th>
+                Khách Hàng
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.booking_from)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.booking_to)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.no_of_members)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.total_amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tbl_room.room_number)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.tbl_customer.cusname
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.booking_from)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.booking_to)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.no_of_members)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.total_amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tbl_room.room_number)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.booking_id })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <footer class="footer">
+        <div class="footer_top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-3 col-md-6 col-lg-3">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                Địa Chỉ
+                            </h3>
+                            <p class="footer_text">
+                                HUFLIT: 828 Sư Vạn Hạnh,<br>
+                                Phường 13, Quận 10, TP.Hồ Chí Minh.
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-lg-3">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                Liên Hệ
+                            </h3>
+                            <p class="footer_text">
+                                0935176455<br>
+                                team6@gmail.com
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-6 col-lg-2">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                Liên Kết
+                            </h3>
+                            <ul>
+                                <li><a href="@Url.Action("Home","View")">Trang Chủ</a></li>
+                                <li><a href="@Url.Action("Room","View")">Phòng</a></li>
+                                <li><a href="@Url.Action("About","View")">Giới Thiệu</a></li>
+                                <li><a href="@Url.Action("Contact","View")">Liên Hệ</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6 col-lg-4">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                Bản Tin
+                            </h3>
+                            <form action="#" class="newsletter_form">
+                                <input type="text" placeholder="Nhập nội dung">
+                                <button type="submit">Đăng Ký</button>
+                            </form>
+                            <p class="newsletter_text">Theo dõi bản tin để biết thông tin.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copy-right_text">
+            <div class="container">
+                <div class="footer_border"></div>
+                <div class="row">
+                    <div class="col-xl-8 col-md-7 col-lg-9">
+                        <p class="copy_right">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </div>
+                    <div class="col-xl-4 col-md-5 col-lg-3">
+                        <div class="socail_links">
+                            <ul>
+                                <li>
+                                    <a href="https://www.facebook.com">
+                                        <i class="fa fa-facebook-square"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.twitter.com">
+                                        <i class="fa fa-twitter"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.instagram.com">
+                                        <i class="fa fa-instagram"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/Content/ViewContent/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="~/Content/ViewContent/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/ViewContent/js/popper.min.js"></script>
+    <script src="~/Content/ViewContent/js/bootstrap.min.js"></script>
+    <script src="~/Content/ViewContent/js/owl.carousel.min.js"></script>
+    <script src="~/Content/ViewContent/js/isotope.pkgd.min.js"></script>
+    <script src="~/Content/ViewContent/js/ajax-form.js"></script>
+    <script src="~/Content/ViewContent/js/waypoints.min.js"></script>
+    <script src="~/Content/ViewContent/js/jquery.counterup.min.js"></script>
+    <script src="~/Content/ViewContent/js/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/ViewContent/js/scrollIt.js"></script>
+    <script src="~/Content/ViewContent/js/jquery.scrollUp.min.js"></script>
+    <script src="~/Content/ViewContent/js/wow.min.js"></script>
+    <script src="~/Content/ViewContent/js/nice-select.min.js"></script>
+    <script src="~/Content/ViewContent/js/jquery.slicknav.min.js"></script>
+    <script src="~/Content/ViewContent/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/ViewContent/js/plugins.js"></script>
+    <script src="~/Content/ViewContent/js/gijgo.min.js"></script>
+
+    <!--contact js-->
+    <script src="~/Content/ViewContent/js/contact.js"></script>
+    <script src="~/Content/ViewContent/js/jquery.ajaxchimp.min.js"></script>
+    <script src="~/Content/ViewContent/js/jquery.form.js"></script>
+    <script src="~/Content/ViewContent/js/jquery.validate.min.js"></script>
+    <script src="~/Content/ViewContent/js/mail-script.js"></script>
+
+    <script src="~/Content/ViewContent/js/main.js"></script>
+    <script>
+        $('#datepicker').datepicker({
+            iconsLibrary: 'fontawesome',
+            icons: {
+                rightIcon: '<span class="fa fa-caret-down"></span>'
+            }
+        });
+        $('#datepicker2').datepicker({
+            iconsLibrary: 'fontawesome',
+            icons: {
+                rightIcon: '<span class="fa fa-caret-down"></span>'
+            }
+
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<KhachSan.Models.DB.tbl_payment>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Thanh Toán</h3>
+
+<p>
+    <div style="padding-top:3px">
+
+        @Html.ActionLink("Tạo Mới", "Create", null, new { @class = "btn btn-outline-secondary" })
+    </div>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Hóa Đơn
+        </th>
+        <th>
+            Tiền Thanh Toán
+        </th>
+        <th>
+            Hoạt Động
+        </th>
+        <th>
+            Hình Thức Thanh Toán
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.booking_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.payment_amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Is_Active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbl_payment_type.payment_type)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "Edit", new { id=item.payment_id }, new { @class = "btn btn-outline-success" })
+            @Html.ActionLink("Chi Tiết", "Details", new { id=item.payment_id }, new { @class = "btn btn-outline-warning" }) 
+            @Html.ActionLink("Xóa", "Delete", new { id=item.payment_id }, new { @class = "btn btn-outline-danger" })
+        </td>
+    </tr>
+}
+
+</table>

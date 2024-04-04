@@ -1,0 +1,26 @@
+﻿@model KhachSan.Models.DB.tbl_booking_status
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+    <h3>Trạng Thái Phòng</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Trạng Thái Phòng
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.booking_status)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.booking_status_id }, new { @class = "btn btn-warning" })
+    @Html.ActionLink("Trở Lại", "Index", null, new { @class = "btn btn-info" })
+</p>

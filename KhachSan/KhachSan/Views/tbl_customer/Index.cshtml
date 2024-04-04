@@ -1,0 +1,45 @@
+﻿@model IEnumerable<KhachSan.Models.DB.tbl_customer>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.cusname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.emailcus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cus_password)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.cusname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.emailcus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cus_password)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.cus_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.cus_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.cus_id })
+        </td>
+    </tr>
+}
+
+</table>
